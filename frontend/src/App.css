@@ -40,15 +40,3 @@
 .read-the-docs {
   color: #888;
 }
-
-body { background: linear-gradient(180deg,#f7fbff, #f2f7ff); }
-/* hero card */
-.hero {
-  border-left: 6px solid rgba(11,61,145,0.9);
-  box-shadow: 0 6px 18px rgba(11,61,145,0.08);
-  background: linear-gradient(180deg, rgba(255,255,255,0.9), #fff);
-}
-/* responsive tweaks */
-@media (max-width: 600px) {
-  .hero { padding: 16px !important; }
-}
