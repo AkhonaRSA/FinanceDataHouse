@@ -1,1 +1,1 @@
-![Dashboard Screenshot](frontend/src/assets/dashboard.png)
+![Dashboard Screenshot](frontend/src/assets/img.png)
