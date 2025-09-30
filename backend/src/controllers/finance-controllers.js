@@ -2,7 +2,6 @@ const ExcelJS = require('exceljs');
 const recordModel = require('../models/financialRecordModel.js');
 const connection = require('../config/config.js');
 
-// POST handler expects a multipart/form-data file field named "file"
 async function uploadExcel(req, res) {
   try {
     const { userId, year } = req.params;
@@ -21,15 +20,13 @@ async function uploadExcel(req, res) {
 
     const parsed = [];
     worksheet.eachRow({ includeEmpty: false }, (row, rowNumber) => {
-      // assume first row might be header — skip if it has non-numeric month
       const rawMonth = row.getCell(1).value;
       const rawAmount = row.getCell(2).value;
-      // skip header row detection: if rowNumber===1 and first cell is text
       if (rowNumber === 1 && (typeof rawMonth === 'string' || rawMonth === null)) return;
       const month = Number(rawMonth);
       const amount = Number(rawAmount);
       if (!Number.isInteger(month) || month < 1 || month > 12) {
-        // invalid month -> skip (or you could collect errors)
+       
         return;
       }
       if (!Number.isFinite(amount)) return;
@@ -54,7 +51,6 @@ async function uploadExcel(req, res) {
 // GET /api/finances/:userId/:year
 async function getRecordsByUserYear(req, res) {
   try {
-    // strip accidental leading ":" and trim
     let { userId, year } = req.params;
     if (!userId || !year) return res.status(400).json({ message: 'ERROR', cause: 'Missing userId or year' });
 
@@ -67,7 +63,7 @@ async function getRecordsByUserYear(req, res) {
     if (!Number.isInteger(year)) return res.status(400).json({ message: 'ERROR', cause: 'Invalid year' });
 
     const rows = await recordModel.getRecordsByUserYear(userId, year);
-    // optionally return user info even if no records
+    
     const userName = rows.length ? rows[0].user_name : null;
 
     return res.status(200).json({ message: 'OK', user_id: userId, user_name: userName, records: rows });

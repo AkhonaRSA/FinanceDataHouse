@@ -15,14 +15,8 @@ const upload = multer({
   limits: { fileSize: 10 * 1024 * 1024 } // 10 MB
 });
 
-// POST /api/finances/upload/:userId/:year  (file field name: "file")
 router.post('/upload/:userId/:year', upload.single('file'), ctrl.uploadExcel);
-
 // GET /api/finances/:userId/:year
 router.get('/:userId/:year', ctrl.getRecordsByUserYear);
-
-// keep existing record endpoints if you still want them
-// router.post('/records', require('../controllers/finance-controllers').createFinancialRecord);
-// router.get('/records/:user_id', require('../controllers/finance-controllers').getRecordsByUser);
 
 module.exports = router;

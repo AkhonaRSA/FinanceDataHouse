@@ -1,7 +1,7 @@
 const userModel = require("../models/userModel.js");
 const connection = require("../config/config.js");
 
-// Return all users (id + name)
+// all users (id + name)
 async function getAllUsers(req, res) {
   try {
     const [rows] = await connection.promise().execute('SELECT `_id`, `name` FROM users');
@@ -12,7 +12,6 @@ async function getAllUsers(req, res) {
   }
 }
 
-// Create a user (name only for mock)
 async function userSignUp(req, res) {
   try {
     const { name } = req.body;
@@ -29,7 +28,6 @@ async function userSignUp(req, res) {
   }
 }
 
-// "Login" by name (mock behaviour)
 async function userLogIn(req, res) {
   try {
     const { name } = req.body;

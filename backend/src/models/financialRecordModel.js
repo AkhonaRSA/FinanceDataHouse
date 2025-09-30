@@ -15,7 +15,7 @@ async function createFinancialRecord({ user_id, year, month, amount }) {
   return { _record_id: result.insertId, result };
 }
 
-// bulk insert array of { user_id, year, month, amount }
+
 async function createFinancialRecords(records) {
   if (!Array.isArray(records) || records.length === 0) return { inserted: 0, ids: [] };
   const conn = connection.promise();
